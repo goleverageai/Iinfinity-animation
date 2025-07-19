@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Cinematic Infinity Symbol Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            perspective: 1200px;
+            perspective-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: cinematicCamera 25s ease-in-out infinite;
+        }
+
+        @keyframes cinematicCamera {
+            0% {
+                perspective: 800px;
+                transform: rotateX(0deg) rotateY(0deg) scale(0.5);
+                filter: blur(3px);
+            }
+            15% {
+                perspective: 1200px;
+                transform: rotateX(5deg) rotateY(10deg) scale(1);
+                filter: blur(0px);
+            }
+            30% {
+                perspective: 1500px;
+                transform: rotateX(-10deg) rotateY(-15deg) scale(1.1);
+            }
+            45% {
+                perspective: 1000px;
+                transform: rotateX(15deg) rotateY(20deg) scale(0.9);
+            }
+            60% {
+                perspective: 1800px;
+                transform: rotateX(-5deg) rotateY(-10deg) scale(1.2);
+            }
+            75% {
+                perspective: 1200px;
+                transform: rotateX(8deg) rotateY(12deg) scale(1);
+            }
+            90% {
+                perspective: 1400px;
+                transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+            }
+            100% {
+                perspective: 800px;
+                transform: rotateX(0deg) rotateY(0deg) scale(0.5);
+                filter: blur(3px);
+            }
+        }
+
+        .infinity-3d {
+            position: relative;
+            width: 600px;
+            height: 300px;
+            transform-style: preserve-3d;
+            animation: rotate3D 12s linear infinite;
+        }
+
+        @keyframes rotate3D {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+            25% {
+                transform: rotateX(15deg) rotateY(90deg) rotateZ(5deg);
+            }
+            50% {
+                transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+            }
+            75% {
+                transform: rotateX(-15deg) rotateY(270deg) rotateZ(-5deg);
+            }
+            100% {
+                transform: rotateX(0deg) rotateY(360deg) rotateZ(0deg);
+            }
+        }
+
+        .infinity-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .infinity-layer:nth-child(1) { transform: translateZ(0px); }
+        .infinity-layer:nth-child(2) { transform: translateZ(-20px); opacity: 0.8; }
+        .infinity-layer:nth-child(3) { transform: translateZ(-40px); opacity: 0.6; }
+        .infinity-layer:nth-child(4) { transform: translateZ(-60px); opacity: 0.4; }
+        .infinity-layer:nth-child(5) { transform: translateZ(-80px); opacity: 0.2; }
+
+        .infinity-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 237, 0.8));
+        }
+
+        .infinity-path {
+            fill: none;
+            stroke: url(#infinityGradient);
+            stroke-width: 14;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 237, 1));
+            animation: pathPulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pathPulse {
+            0% {
+                stroke-width: 14;
+                opacity: 1;
+            }
+            100% {
+                stroke-width: 18;
+                opacity: 0.9;
+            }
+        }
+
+        .sparkle-3d {
+            r: 10;
+            fill: #ffffff;
+            filter: drop-shadow(0 0 25px #ffffff);
+            animation: sparkle3DGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes sparkle3DGlow {
+            0% {
+                r: 10;
+                opacity: 1;
+                filter: drop-shadow(0 0 25px #ffffff);
+            }
+            100% {
+                r: 15;
+                opacity: 0.8;
+                filter: drop-shadow(0 0 40px #ffffff);
+            }
+        }
+
+        .sparkle-trail-3d {
+            r: 5;
+            fill: rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+        }
+
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            transform-style: preserve-3d;
+        }
+
+        .particle-3d {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float3D 6s ease-in-out infinite;
+        }
+
+        @keyframes float3D {
+            0%, 100% {
+                transform: translateZ(0px) translateY(0px) rotateX(0deg);
+                opacity: 0.8;
+            }
+            25% {
+                transform: translateZ(100px) translateY(-20px) rotateX(90deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateZ(50px) translateY(10px) rotateX(180deg);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translateZ(-50px) translateY(-10px) rotateX(270deg);
+                opacity: 0.9;
+            }
+        }
+
+        .scene:hover .infinity-3d {
+            animation-duration: 6s;
+            transform: scale(1.1);
+        }
+
+        .scene:hover .infinity-path {
+            stroke-width: 20;
+            filter: drop-shadow(0 0 35px rgba(255, 0, 237, 1));
+        }
+
+        .background-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star-3d {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: twinkle3D 5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle3D {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1) translateZ(0px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(2) translateZ(50px);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .infinity-3d {
+                width: 400px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .infinity-3d {
+                width: 320px;
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene" id="scene">
+        <div class="infinity-3d" id="infinity3D">
+            <!-- Multiple layers for 3D depth effect -->
+            <div class="infinity-layer">
+                <svg class="infinity-svg" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="infinityGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#ff00ed;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0038ff;stop-opacity:1" />
+                        </linearGradient>
+                        
+                        <!-- Perfect infinity symbol with only two loops -->
+                        <path id="infinityPath3D" d="M 150 150 C 150 100, 200 100, 250 150 C 300 200, 350 200, 400 150 C 450 100, 450 200, 400 150 C 350 100, 300 100, 250 150 C 200 200, 150 200, 150 150 Z"/>
+                    </defs>
+                    
+                    <!-- Main infinity path -->
+                    <path class="infinity-path" d="M 150 150 C 150 100, 200 100, 250 150 C 300 200, 350 200, 400 150 C 450 100, 450 200, 400 150 C 350 100, 300 100, 250 150 C 200 200, 150 200, 150 150 Z"/>
+                    
+                    <!-- Multiple sparkle trails for 3D effect -->
+                    <circle class="sparkle-trail-3d" opacity="0.7">
+                        <animateMotion dur="8s" repeatCount="indefinite" begin="0s">
+                            <mpath href="#infinityPath3D"/>
+                        </animateMotion>
+                    </circle>
+                    
+                    <circle class="sparkle-trail-3d" opacity="0.5">
+                        <animateMotion dur="8s" repeatCount="indefinite" begin="2.67s">
+                            <mpath href="#infinityPath3D"/>
+                        </animateMotion>
+                    </circle>
+                    
+                    <circle class="sparkle-trail-3d" opacity="0.3">
+                        <animateMotion dur="8s" repeatCount="indefinite" begin="5.33s">
+                            <mpath href="#infinityPath3D"/>
+                        </animateMotion>
+                    </circle>
+                    
+                    <!-- Main 3D sparkle -->
+                    <circle class="sparkle-3d">
+                        <animateMotion dur="8s" repeatCount="indefinite">
+                            <mpath href="#infinityPath3D"/>
+                        </animateMotion>
+                    </circle>
+                </svg>
+            </div>
+            
+            <div class="infinity-layer">
+                <svg class="infinity-svg" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <path class="infinity-path" d="M 150 150 C 150 100, 200 100, 250 150 C 300 200, 350 200, 400 150 C 450 100, 450 200, 400 150 C 350 100, 300 100, 250 150 C 200 200, 150 200, 150 150 Z"/>
+                </svg>
+            </div>
+            
+            <div class="infinity-layer">
+                <svg class="infinity-svg" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <path class="infinity-path" d="M 150 150 C 150 100, 200 100, 250 150 C 300 200, 350 200, 400 150 C 450 100, 450 200, 400 150 C 350 100, 300 100, 250 150 C 200 200, 150 200, 150 150 Z"/>
+                </svg>
+            </div>
+            
+            <div class="infinity-layer">
+                <svg class="infinity-svg" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <path class="infinity-path" d="M 150 150 C 150 100, 200 100, 250 150 C 300 200, 350 200, 400 150 C 450 100, 450 200, 400 150 C 350 100, 300 100, 250 150 C 200 200, 150 200, 150 150 Z"/>
+                </svg>
+            </div>
+            
+            <div class="infinity-layer">
+                <svg class="infinity-svg" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <path class="infinity-path" d="M 150 150 C 150 100, 200 100, 250 150 C 300 200, 350 200, 400 150 C 450 100, 450 200, 400 150 C 350 100, 300 100, 250 150 C 200 200, 150 200, 150 150 Z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="floating-particles" id="floatingParticles"></div>
+        <div class="background-stars" id="backgroundStars"></div>
+    </div>
+
+    <script>
+        const scene = document.getElementById('scene');
+        const infinity3D = document.getElementById('infinity3D');
+        const floatingParticles = document.getElementById('floatingParticles');
+        const backgroundStars = document.getElementById('backgroundStars');
+        let mouseX = 0;
+        let mouseY = 0;
+
+        // Create 3D background stars
+        function create3DStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star-3d';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                star.style.transform = `translateZ(${Math.random() * 200 - 100}px)`;
+                backgroundStars.appendChild(star);
+            }
+        }
+
+        // Create floating 3D particles
+        function create3DParticles() {
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle-3d';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                
+                // Random color from gradient
+                const colors = ['#ff0000', '#ff00ed', '#0038ff', '#ffffff'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+                particle.style.boxShadow = `0 0 15px ${randomColor}`;
+                
+                floatingParticles.appendChild(particle);
+            }
+        }
+
+        // Enhanced 3D mouse tracking
+        scene.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            const rect = scene.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const mouseXRelative = e.clientX - rect.left;
+            const mouseYRelative = e.clientY - rect.top;
+            
+            const deltaX = (mouseXRelative - centerX) / centerX;
+            const deltaY = (mouseYRelative - centerY) / centerY;
+            
+            // 3D parallax effect
+            infinity3D.style.transform = `
+                rotateY(${deltaX * 20}deg) 
+                rotateX(${-deltaY * 15}deg) 
+                translateZ(${Math.abs(deltaX) * 50}px)
+                scale(${1 + Math.abs(deltaX) * 0.1})
+            `;
+            
+            // Create interactive 3D particles
+            if (Math.random() < 0.3) {
+                createInteractive3DParticle(mouseX, mouseY);
+            }
+        });
+
+        // Create interactive 3D particles
+        function createInteractive3DParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle-3d';
+            
+            // Random 3D offset
+            const offsetX = (Math.random() - 0.5) * 200;
+            const offsetY = (Math.random() - 0.5) * 200;
+            const offsetZ = (Math.random() - 0.5) * 100;
+            
+            particle.style.left = (x + offsetX) + 'px';
+            particle.style.top = (y + offsetY) + 'px';
+            particle.style.transform = `translateZ(${offsetZ}px)`;
+            
+            // Random color and size
+            const colors = ['#ff0000', '#ff00ed', '#0038ff', '#ffffff'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const size = 6 + Math.random() * 6;
+            
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+            particle.style.boxShadow = `0 0 20px ${randomColor}`;
+            
+            floatingParticles.appendChild(particle);
+            
+            // Remove after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 6000);
+        }
+
+        // Reset 3D transform on mouse leave
+        scene.addEventListener('mouseleave', () => {
+            infinity3D.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px) scale(1)';
+        });
+
+        // 3D click effect
+        scene.addEventListener('click', () => {
+            scene.style.animation = 'none';
+            scene.style.transform = 'rotateX(20deg) rotateY(30deg) scale(1.3)';
+            scene.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            setTimeout(() => {
+                scene.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+                setTimeout(() => {
+                    scene.style.animation = 'cinematicCamera 25s ease-in-out infinite';
+                    scene.style.transition = '';
+                }, 800);
+            }, 800);
+        });
+
+        // Initialize 3D environment
+        create3DStars();
+        create3DParticles();
+
+        // Ambient 3D particle generation
+        setInterval(() => {
+            const rect = infinity3D.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Create particles in 3D space around the infinity symbol
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 100 + Math.random() * 150;
+            const x = centerX + Math.cos(angle) * radius;
+            const y = centerY + Math.sin(angle) * radius;
+            
+            if (Math.random() < 0.2) {
+                createInteractive3DParticle(x, y);
+            }
+        }, 400);
+    </script>
+</body>
+</html>
+

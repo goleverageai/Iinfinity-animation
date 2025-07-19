@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Infinity Symbol Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .cinematic-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            animation: cinematicSequence 20s ease-in-out infinite;
+        }
+
+        @keyframes cinematicSequence {
+            0% {
+                transform: scale(0.3) translateZ(0px);
+                filter: blur(2px);
+            }
+            15% {
+                transform: scale(1) translateZ(0px);
+                filter: blur(0px);
+            }
+            30% {
+                transform: scale(1) translateX(-50px) translateY(-20px);
+            }
+            45% {
+                transform: scale(1.2) translateX(30px) translateY(15px);
+            }
+            60% {
+                transform: scale(0.8) translateX(0px) translateY(-30px);
+            }
+            75% {
+                transform: scale(1.1) translateX(-20px) translateY(10px);
+            }
+            90% {
+                transform: scale(1) translateX(0px) translateY(0px);
+            }
+            100% {
+                transform: scale(0.3) translateZ(0px);
+                filter: blur(2px);
+            }
+        }
+
+        .infinity-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: floatingMotion 8s ease-in-out infinite;
+        }
+
+        @keyframes floatingMotion {
+            0%, 100% {
+                transform: translateY(0px) rotateZ(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotateZ(1deg);
+            }
+            50% {
+                transform: translateY(5px) rotateZ(-0.5deg);
+            }
+            75% {
+                transform: translateY(-5px) rotateZ(0.5deg);
+            }
+        }
+
+        .infinity-svg {
+            width: 500px;
+            height: 250px;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 237, 0.6));
+            transition: all 0.3s ease;
+        }
+
+        .infinity-path {
+            fill: none;
+            stroke: url(#infinityGradient);
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 237, 0.8));
+            animation: pathGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes pathGlow {
+            0% {
+                stroke-width: 12;
+                filter: drop-shadow(0 0 15px rgba(255, 0, 237, 0.8));
+            }
+            100% {
+                stroke-width: 14;
+                filter: drop-shadow(0 0 25px rgba(255, 0, 237, 1));
+            }
+        }
+
+        .sparkle {
+            r: 8;
+            fill: #ffffff;
+            filter: drop-shadow(0 0 20px #ffffff);
+            animation: sparkleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes sparkleGlow {
+            0% {
+                r: 8;
+                opacity: 1;
+                filter: drop-shadow(0 0 20px #ffffff);
+            }
+            100% {
+                r: 12;
+                opacity: 0.8;
+                filter: drop-shadow(0 0 30px #ffffff);
+            }
+        }
+
+        .sparkle-trail {
+            r: 4;
+            fill: rgba(255, 255, 255, 0.4);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+        }
+
+        .sparkle-particles {
+            position: absolute;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+            border-radius: 50%;
+            animation: sparkleParticle 3s ease-out infinite;
+        }
+
+        @keyframes sparkleParticle {
+            0% {
+                opacity: 1;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(1.5) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0) rotate(360deg);
+            }
+        }
+
+        .infinity-container:hover .infinity-svg {
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 40px rgba(255, 0, 237, 0.9));
+        }
+
+        .infinity-container:hover .infinity-path {
+            stroke-width: 16;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 237, 1));
+        }
+
+        .infinity-container:hover .sparkle {
+            r: 10;
+            animation-duration: 1s;
+        }
+
+        .background-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .infinity-svg {
+                width: 350px;
+                height: 175px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .infinity-svg {
+                width: 280px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cinematic-container" id="cinematicContainer">
+        <div class="infinity-container" id="infinityContainer">
+            <svg class="infinity-svg" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="infinityGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#ff00ed;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0038ff;stop-opacity:1" />
+                    </linearGradient>
+                    
+                    <!-- Proper infinity symbol with only two loops -->
+                    <path id="infinityPath" d="M 125 125 C 125 75, 175 75, 200 125 C 225 175, 275 175, 300 125 C 325 75, 375 75, 375 125 C 375 175, 325 175, 300 125 C 275 75, 225 75, 200 125 C 175 175, 125 175, 125 125 Z"/>
+                </defs>
+                
+                <!-- Main infinity path -->
+                <path class="infinity-path" d="M 125 125 C 125 75, 175 75, 200 125 C 225 175, 275 175, 300 125 C 325 75, 375 75, 375 125 C 375 175, 325 175, 300 125 C 275 75, 225 75, 200 125 C 175 175, 125 175, 125 125 Z"/>
+                
+                <!-- Multiple sparkle trails for enhanced effect -->
+                <circle class="sparkle-trail" opacity="0.6">
+                    <animateMotion dur="6s" repeatCount="indefinite" begin="0s">
+                        <mpath href="#infinityPath"/>
+                    </animateMotion>
+                </circle>
+                
+                <circle class="sparkle-trail" opacity="0.4">
+                    <animateMotion dur="6s" repeatCount="indefinite" begin="2s">
+                        <mpath href="#infinityPath"/>
+                    </animateMotion>
+                </circle>
+                
+                <circle class="sparkle-trail" opacity="0.3">
+                    <animateMotion dur="6s" repeatCount="indefinite" begin="4s">
+                        <mpath href="#infinityPath"/>
+                    </animateMotion>
+                </circle>
+                
+                <!-- Main sparkle -->
+                <circle class="sparkle">
+                    <animateMotion dur="6s" repeatCount="indefinite">
+                        <mpath href="#infinityPath"/>
+                    </animateMotion>
+                </circle>
+            </svg>
+            
+            <div class="sparkle-particles" id="sparkleParticles"></div>
+        </div>
+        
+        <div class="background-particles" id="backgroundParticles"></div>
+    </div>
+
+    <script>
+        const cinematicContainer = document.getElementById('cinematicContainer');
+        const container = document.getElementById('infinityContainer');
+        const particlesContainer = document.getElementById('sparkleParticles');
+        const backgroundParticles = document.getElementById('backgroundParticles');
+        let mouseX = 0;
+        let mouseY = 0;
+
+        // Create background twinkling stars
+        function createBackgroundStars() {
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'bg-particle';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                backgroundParticles.appendChild(star);
+            }
+        }
+
+        // Enhanced mouse tracking with cinematic response
+        cinematicContainer.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            const rect = cinematicContainer.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const mouseXRelative = e.clientX - rect.left;
+            const mouseYRelative = e.clientY - rect.top;
+            
+            const deltaX = (mouseXRelative - centerX) / centerX;
+            const deltaY = (mouseYRelative - centerY) / centerY;
+            
+            // Subtle parallax effect
+            const svg = container.querySelector('.infinity-svg');
+            svg.style.transform = `translate(${deltaX * 15}px, ${deltaY * 15}px)`;
+            
+            // Create enhanced sparkle particles
+            if (Math.random() < 0.4) {
+                createEnhancedSparkleParticle(mouseX, mouseY);
+            }
+        });
+
+        // Enhanced sparkle particle creation
+        function createEnhancedSparkleParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random offset from cursor with larger spread
+            const offsetX = (Math.random() - 0.5) * 150;
+            const offsetY = (Math.random() - 0.5) * 150;
+            
+            particle.style.left = (x + offsetX) + 'px';
+            particle.style.top = (y + offsetY) + 'px';
+            
+            // Random color from the gradient with enhanced brightness
+            const colors = ['#ff0000', '#ff00ed', '#0038ff', '#ffffff'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+            particle.style.boxShadow = `0 0 10px ${randomColor}`;
+            
+            // Random size variation
+            const size = 4 + Math.random() * 4;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            particlesContainer.appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 3000);
+        }
+
+        // Enhanced ambient particle generation
+        setInterval(() => {
+            const svg = document.querySelector('.infinity-svg');
+            const rect = svg.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Create particles around the infinity symbol with varied patterns
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 80 + Math.random() * 120;
+            const x = centerX + Math.cos(angle) * radius;
+            const y = centerY + Math.sin(angle) * radius;
+            
+            if (Math.random() < 0.15) {
+                createEnhancedSparkleParticle(x, y);
+            }
+        }, 300);
+
+        // Reset transform on mouse leave
+        cinematicContainer.addEventListener('mouseleave', () => {
+            const svg = container.querySelector('.infinity-svg');
+            svg.style.transform = 'translate(0px, 0px)';
+        });
+
+        // Initialize background stars
+        createBackgroundStars();
+
+        // Add cinematic zoom effect on click
+        cinematicContainer.addEventListener('click', () => {
+            cinematicContainer.style.animation = 'none';
+            cinematicContainer.style.transform = 'scale(1.5)';
+            cinematicContainer.style.transition = 'transform 0.5s ease-out';
+            
+            setTimeout(() => {
+                cinematicContainer.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    cinematicContainer.style.animation = 'cinematicSequence 20s ease-in-out infinite';
+                    cinematicContainer.style.transition = '';
+                }, 500);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+
